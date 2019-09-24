@@ -1,0 +1,5 @@
+docker exec cliMagnetoCorp peer channel fetch newest -c mychannel 
+
+Thsi fetches the block info's
+docker exec cliMagnetoCorp peer channel getinfo -c mychannel
+

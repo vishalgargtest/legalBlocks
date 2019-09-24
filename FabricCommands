@@ -1,0 +1,24 @@
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+cd ~
+cd legalBlocks/basic-network/
+./start.sh
+
+cd ~
+cd legalBlocks/
+cd legalBlockNetwork/organization/xpanxion/configuration/cli/
+docker-compose -f docker-compose.yml up -d 
+
+cd ~
+ cd legalBlocks/legalBlockNetwork/organization/xpanxion/contract
+ docker exec cliXpanxionCorp peer chaincode install -n employeebddetailscontract -v 1.0.7 -p /opt/gopath/src/github.com/contract -l node
+
+docker exec cliXpanxionCorp peer chaincode instantiate -n employeebddetailscontract -v 1.0.7 -l node -c '{"Args":["org.hrnet.employeeBgInfo:instantiate"]}' -C mychannel -P "AND ('Org1MSP.member')"
+
+cd..
+cd..
+cd application
+npm install
+node issue.js
+
