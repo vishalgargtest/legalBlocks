@@ -1,3 +1,4 @@
+
 /*
 SPDX-License-Identifier: Apache-2.0
 */
@@ -53,17 +54,17 @@ async function main() {
         await gateway.connect(connectionProfile, connectionOptions);
 
         // Access PaperNet network
-        console.log('Use network channel: mychannel.');
+        console.log('Use  network between organizations and NASSCOM');
 
         const network = await gateway.getNetwork('mychannel');
 
         // Get addressability to commercial paper contract
-        console.log('Use org.papernet.commercialpaper smart contract.');
+        console.log('Use org.hrnet.employeeBgInfo smart contract.');
 
         const contract = await network.getContract('employeebddetailscontract');
 
         // issue commercial paper
-        console.log('Submit commercial paper issue transaction.');
+        console.log('Submit relieve issue transaction.');
 
         const issueResponse = await contract.submitTransaction('issue', 'MagnetoCorp', '00003', '2020-05-31', '2020-11-30', '7000');
 
@@ -72,7 +73,7 @@ async function main() {
 
         let paper = CommercialPaper.fromBuffer(issueResponse);
 
-        console.log(`${paper.issuer} commercial paper : ${paper.paperNumber} successfully issued for value ${paper.faceValue}`);
+        console.log(`${paper.issuer} employee details : ${paper.paperNumber} successfully issued for value ${paper.faceValue}`);
         console.log('Transaction complete.');
 
     } catch (error) {

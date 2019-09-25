@@ -9,7 +9,6 @@ const { Contract, Context } = require('fabric-contract-api');
 
 // PaperNet specifc classes
 const EmployeeInfo = require('./employee');
-const employeeDetails = require('./employee');
 const employeelist = require('./employeelist');
 
 /**
@@ -34,6 +33,7 @@ class EmployeeBackgroundDetailsContract extends Contract {
     constructor() {
         // Unique name when multiple contracts per chaincode file
         super('org.hrnet.employeeBgInfo');
+        this.employeeInfoDetails = new  EmployeeInfo();
     }
 
     /**
@@ -64,7 +64,6 @@ class EmployeeBackgroundDetailsContract extends Contract {
      * @param {Integer} faceValue face value of paper
     */
     async issue(ctx, issuer, paperNumber, issueDateTime, maturityDateTime, faceValue) {
-
         // create an instance of the paper
         let paper = EmployeeInfo.createInstance(issuer, paperNumber, issueDateTime, maturityDateTime, faceValue);
 
@@ -151,6 +150,16 @@ class EmployeeBackgroundDetailsContract extends Contract {
     //     await ctx.paperList.updatePaper(paper);
     //     return paper;
     // }
+    /**
+     * Redeem commercial paper
+     * @param {Context} ctx the transaction context
+     * @param {any} args the key
+    */
+   async query(ctx,args) {
+    //Testing In Container
+    let paper = await ctx.employeelist.getEmployee(args);
+    return paper;
+  }
 }
 
 
