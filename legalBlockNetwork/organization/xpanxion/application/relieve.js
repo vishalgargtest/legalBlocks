@@ -66,7 +66,7 @@ async function main() {
         // issue commercial paper
         console.log('Submit relieve issue transaction.');
 
-        const issueResponse = await contract.submitTransaction('issue', 'MagnetoCorp', '00003', '2020-05-31', '2020-11-30', '7000');
+        const issueResponse = await contract.submitTransaction('issue', 'Xpanxion', '1122324521XXX', '2020-05-31', '2020-11-30', 'TSDFG1087G');
 
         // process response
         console.log('Process issue transaction response.'+issueResponse);

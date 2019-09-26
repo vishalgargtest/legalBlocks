@@ -64,7 +64,7 @@ async function main() {
 
         // issue commercial paper
         console.log('Contract successfully fetched');
-        const issueResponse = await contract.evaluateTransaction('query', '\"MagnetoCorp\":\"00003\"');
+        const issueResponse = await contract.evaluateTransaction('query', '\"Xpanxion\":\"TSDFG1087G\"');
 
         // process response
         console.log('Process issue transaction response.'+issueResponse);

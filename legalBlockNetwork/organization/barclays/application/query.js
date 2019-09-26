@@ -66,7 +66,7 @@ async function main () {
         console.log('Submit commercial paper buy transaction.');
 
         console.log('test Vishal')
-        const buyResponse = await contract.submitTransaction('query', 'MagnetoCorp');
+        const issueResponse = await contract.evaluateTransaction('query', '\"Xpanxion\":\"TSDFG1087G\"');
         Console.log('Step 2')
         // process response
         console.log('Process buy transaction response.');

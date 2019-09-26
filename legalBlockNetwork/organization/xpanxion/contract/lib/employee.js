@@ -21,7 +21,7 @@ const cpState = {
 class Employee extends State {
 
     constructor(obj) {
-        super(Employee.getClass(), [obj.issuer, obj.paperNumber]);
+        super(Employee.getClass(), [obj.issuerOrg, obj.panNumber]);
         Object.assign(this, obj);
     }
 
@@ -90,8 +90,8 @@ class Employee extends State {
     /**
      * Factory method to create a commercial paper object
      */
-    static createInstance(issuer, paperNumber, issueDateTime, maturityDateTime, faceValue) {
-        return new Employee({ issuer, paperNumber, issueDateTime, maturityDateTime, faceValue });
+    static createInstance(issuerOrg, digiLockerNumber, joiningDate, lastDate, panNumber) {
+        return new Employee({ issuerOrg, digiLockerNumber, joiningDate, lastDate, panNumber });
     }
 
     static getClass() {

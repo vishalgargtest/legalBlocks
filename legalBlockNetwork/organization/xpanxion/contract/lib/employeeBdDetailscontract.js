@@ -56,21 +56,21 @@ class EmployeeBackgroundDetailsContract extends Contract {
      * Issue commercial paper
      *
      * @param {Context} ctx the transaction context
-     * @param {String} issuer commercial paper issuer
-     * @param {Integer} paperNumber paper number for this issuer
-     * @param {String} issueDateTime paper issue date
-     * @param {String} maturityDateTime paper maturity date
-     * @param {Integer} faceValue face value of paper
+     * @param {String} issuerOrg commercial paper issuer
+     * @param {Integer} digiLockerNumber paper number for this issuer
+     * @param {String} joiningDate paper issue date
+     * @param {String} lastDate paper maturity date
+     * @param {Integer} panNumber face value of paper
     */
-    async issue(ctx, issuer, paperNumber, issueDateTime, maturityDateTime, faceValue) {
+    async issue(ctx, issuerOrg, digiLockerNumber, joiningDate, lastDate, panNumber) {
         // create an instance of the paper
-        let paper = EmployeeInfo.createInstance(issuer, paperNumber, issueDateTime, maturityDateTime, faceValue);
+        let paper = EmployeeInfo.createInstance(issuerOrg, digiLockerNumber, joiningDate, lastDate, panNumber);
 
         // Smart contract, rather than paper, moves paper into ISSUED state
         paper.setIssued();
 
         // Newly issued paper is owned by the issuer
-        paper.setOwner(issuer);
+        paper.setOwner(issuerOrg);
 
         // Add the paper to the list of all similar commercial papers in the ledger world state
         await ctx.employeelist.addEmployee(paper);
