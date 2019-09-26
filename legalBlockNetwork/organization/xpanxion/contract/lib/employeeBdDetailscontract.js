@@ -33,7 +33,6 @@ class EmployeeBackgroundDetailsContract extends Contract {
     constructor() {
         // Unique name when multiple contracts per chaincode file
         super('org.hrnet.employeeBgInfo');
-        this.employeeInfoDetails = new  EmployeeInfo();
     }
 
     /**
