@@ -1,4 +1,7 @@
-/*
+
+   
+
+        /*
 SPDX-License-Identifier: Apache-2.0
 */
 
@@ -18,13 +21,14 @@ SPDX-License-Identifier: Apache-2.0
 const fs = require('fs');
 const yaml = require('js-yaml');
 const { FileSystemWallet, Gateway } = require('fabric-network');
-const CommercialPaper = require('../../magnetocorp/contract/lib/paper.js');
+const CommercialPaper = require('../contract/lib/paper.js');
 
 // A wallet stores a collection of identities for use
+//const wallet = new FileSystemWallet('../user/isabella/wallet');
 const wallet = new FileSystemWallet('../identity/user/balaji/wallet');
 
 // Main program function
-async function main () {
+async function main() {
 
     // A gateway defines the peers used to access Fabric networks
     const gateway = new Gateway();
@@ -43,8 +47,7 @@ async function main () {
         let connectionOptions = {
             identity: userName,
             wallet: wallet,
-            discovery: { enabled: false, asLocalhost: true }
-
+            discovery: { enabled:false, asLocalhost: true }
         };
 
         // Connect to gateway using application specified parameters
@@ -53,27 +56,25 @@ async function main () {
         await gateway.connect(connectionProfile, connectionOptions);
 
         // Access PaperNet network
-        console.log('Use network channel: mychannel.');
+        console.log('Get employee details from NASSCOM');
 
         const network = await gateway.getNetwork('mychannel');
 
         // Get addressability to commercial paper contract
-        console.log('Use org.papernet.commercialpaper smart contract.');
+        console.log('Use org.hrnet.employeeBgInfo smart contract.');
 
-        const contract = await network.getContract('papercontract', 'org.papernet.commercialpaper');
+        const contract = await network.getContract('employeebddetailscontract');
 
-        // buy commercial paper
-        console.log('Submit commercial paper buy transaction.');
-
-        console.log('test Vishal')
+        // issue commercial paper
+        console.log('Contract successfully fetched');
         const issueResponse = await contract.evaluateTransaction('query', '\"Xpanxion\":\"TSDFG1087G\"');
-        Console.log('Step 2')
+
         // process response
-        console.log('Process buy transaction response.');
+        console.log('Process issue transaction response.'+issueResponse);
 
-        let paper = CommercialPaper.fromBuffer(buyResponse);
+        let paper = CommercialPaper.fromBuffer(issueResponse);
 
-        console.log(`${paper.issuer} commercial paper : ${paper.paperNumber} successfully purchased by ${paper.owner}`);
+        console.log(`${paper.issuer} commercial paper : ${paper.paperNumber} successfully issued for value ${paper.faceValue}`);
         console.log('Transaction complete.');
 
     } catch (error) {
@@ -91,11 +92,11 @@ async function main () {
 }
 main().then(() => {
 
-    console.log('Buy program complete.');
+    console.log('Issue program complete.');
 
 }).catch((e) => {
 
-    console.log('Buy program exception.');
+    console.log('Issue program exception.');
     console.log(e);
     console.log(e.stack);
     process.exit(-1);
