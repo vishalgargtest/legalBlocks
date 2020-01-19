@@ -18,7 +18,7 @@ echo "
  Install and Instantiate a Smart Contract as 'Magnetocorp'
 
  
- Run Applications in either langauage (can be different from the Smart Contract)
+ Run Applications in either language (can be different from the Smart Contract)
 
  JavaScript Client Aplications:
 
